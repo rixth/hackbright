@@ -2,7 +2,6 @@ import os
 import os.path
 import shutil
 
-
 # This is used to determine whether the string starts with something
 # print astring.startswith("Hello")
 
@@ -13,26 +12,16 @@ organize files into the directory that their name starts with
 
 """
 
-folders = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
             'u', 'v', 'w', 'x', 'y', 'z']
 
-# while len(folders):
-for f in folders:
-    files = os.listdir("original_files/files")
+base = "/Users/trix/workspace/hackbright/wk1_day3/Week_1_Project"
+out_dir = base + "/out/"
 
-    for filename in files:
-        if filename.startswith(f):
-            if os.path.exists("/home/user/src/wk1_day3/Week_1_Project/" + f):
-                shutil.copy2("original_files/files/" + filename,
-                    "/home/user/src/wk1_day3/Week_1_Project/" + f)
-            else:
-                shutil.move("original_files/files/" + filename,
-                    "/home/user/src/wk1_day3/Week_1_Project/" + f)
-
-# Change the current working directory to path.
-# os.chdir(path)
-
-#shutil.move(src, dst)
-
-# os.chdir("/home/user/src/wk1_day3/Week_1_Project/a")
+for letter in letters:
+    for filename in os.listdir(base + "/original_files/files"):
+        if filename.startswith(letter):
+            if os.path.exists(out_dir + letter) == False:
+                os.mkdir(out_dir + letter)
+            shutil.move(base + "/original_files/files/" + filename, out_dir + letter + "/" + filename)
